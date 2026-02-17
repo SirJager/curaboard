@@ -1,0 +1,70 @@
+---
+volumes:
+  directus-db:
+  directus-cache:
+
+networks:
+  curaboard:
+  proxy:
+    external: true
+
+services:
+  # curaboard:
+  #   restart: always
+  #   container_name: curaboard
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - curaboard-pg
+  #   ports: [3000:3000] ## Disable in production
+  #   networks:
+  #     - curaboard
+  #     - proxy
+  #   env_file: .env
+
+  directus-cache:
+    container_name: directus-cache
+    restart: always
+    image: redis:latest
+    networks:
+      - curaboard
+    volumes:
+      - directus-cache:/data
+
+  directus-db:
+    restart: always
+    container_name: directus-db
+    image: postgis/postgis:latest
+    ports: [5432:5432] ## Disable in production
+    depends_on:
+      - directus-cache
+    networks:
+      - curaboard
+    volumes:
+      - "directus-db:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+
+  directus:
+    restart: always
+    container_name: directus
+    image: directus/directus:11.15
+    depends_on:
+      - directus-cache
+      - directus-db
+    ports: [8055:8055] ## Disable in production
+    volumes:
+      - "./public/uploads:/directus/uploads"
+      - "./directus_data/database:/directus/database"
+    networks:
+      - curaboard
+      - proxy
+    environment:
+      SECRET: ${DIRECTUS_SECRET}
+      DB_CLIENT: pg
+      DB_CONNECTION_STRING: pg://${DB_USER}:${DB_PASS}@directus-db/${DB_NAME}
+      REDIS_HOST: directus-cache
+      WEBSOCKETS_ENABLED: true

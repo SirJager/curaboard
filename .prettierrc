@@ -1,0 +1,11 @@
+{
+	"semi": true,
+	"printWidth": 120,
+	"singleQuote": false,
+	"tabWidth": 2,
+	"arrowParens": "always",
+	"trailingComma": "all",
+	"bracketSpacing": false,
+	"useTabs": true,
+	"plugins": ["@ianvs/prettier-plugin-sort-imports"]
+}

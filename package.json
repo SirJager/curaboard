@@ -1,26 +1,54 @@
 {
-  "name": "curaboard",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "next": "16.1.6",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.1.6",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+	"name": "curaboard",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "eslint",
+		"format": "prettier --write . && prettier --check .",
+		"schema": "kysely-codegen --config-file kysely-codegenrc.json",
+		"migrate": "kysely migrate:latest && npm run schema",
+		"migrate:new": "bash -c 'if [ -z \"$1\" ]; then echo \"Error: Migration title required. Example migrate:new users_table\" >&2; exit 1; fi; touch ./src/db/migrations/$(date +\"%Y%m%d%H%M%S\")_${1}.ts' dummy",
+		"db:up": "migrate -source file://src/db/migrations -database $POSTGRES_URI -verbose up",
+		"db:down": "migrate -source file://src/db/migrations -database $POSTGRES_URI -verbose down -all",
+		"db:drop": "migrate -source file://src/db/migrations -database $POSTGRES_URI -verbose drop -f"
+	},
+	"dependencies": {
+		"@hookform/resolvers": "^5.2.2",
+		"@tailwindcss/typography": "^0.5.19",
+		"class-variance-authority": "^0.7.1",
+		"clsx": "^2.1.1",
+		"daisyui": "^5.5.18",
+		"kysely": "^0.28.11",
+		"lucide-react": "^0.564.0",
+		"next": "16.1.6",
+		"pg": "^8.18.0",
+		"react": "19.2.3",
+		"react-dom": "19.2.3",
+		"react-hook-form": "^7.71.1",
+		"sonner": "^2.0.7",
+		"tailwind-merge": "^3.4.1",
+		"tw-animate-css": "^1.4.0"
+	},
+	"devDependencies": {
+		"@ianvs/prettier-plugin-sort-imports": "^4.7.1",
+		"@tailwindcss/postcss": "^4",
+		"@types/node": "^20",
+		"@types/pg": "^8.16.0",
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"eslint": "^9",
+		"eslint-config-next": "16.1.6",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-import": "^2.32.0",
+		"husky": "^9.1.7",
+		"kysely-codegen": "^0.20.0",
+		"kysely-ctl": "^0.20.0",
+		"prettier": "^3.8.1",
+		"tailwindcss": "^4",
+		"typescript": "^5"
+	},
+	"browserslist": "> 1%"
 }
