@@ -7,7 +7,7 @@
 	"domains": true,
 	"envFile": ".envrc",
 	"excludePattern": null,
-	"includePattern": "public.(directus_files|directus_folders)",
+	"includePattern": "public.(directus_files|directus_folders|form_types|form_updates)",
 	"logLevel": "warn",
 	"numericParser": "string",
 	"outFile": "./src/db/schema/types.ts",

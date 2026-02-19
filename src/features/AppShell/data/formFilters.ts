@@ -1,0 +1,92 @@
+export const mortgageTaxForms = [
+	{
+		form_code: "W2",
+		form_name: "Wage and Tax Statement",
+		form_description: "Reports employee wages and taxes withheld. Primary income verification for salaried borrowers.",
+		id: "w2",
+	},
+	{
+		form_code: "W9",
+		form_name: "Request for Taxpayer Identification Number",
+		form_description: "Used to collect SSN or EIN for identity and reporting purposes.",
+		id: "w9",
+	},
+	{
+		form_code: "1040",
+		form_name: "U.S. Individual Income Tax Return",
+		form_description: "Full personal tax return showing income, deductions, and filing status.",
+		id: "1040",
+	},
+	{
+		form_code: "1040 Schedule C",
+		form_name: "Profit or Loss From Business",
+		form_description: "Self-employed income and expenses. Key for borrower income calculation.",
+		id: "1040-schedule-c",
+	},
+	{
+		form_code: "1040 Schedule E",
+		form_name: "Supplemental Income and Loss",
+		form_description: "Reports rental income, royalties, partnerships, and S-corps.",
+		id: "1040-schedule-e",
+	},
+	{
+		form_code: "1099-NEC",
+		form_name: "Nonemployee Compensation",
+		form_description: "Income for contractors or freelancers.",
+		id: "1099-nec",
+	},
+	{
+		form_code: "1099-MISC",
+		form_name: "Miscellaneous Income",
+		form_description: "Additional non-wage income such as rent or prizes.",
+		id: "1099-misc",
+	},
+	{
+		form_code: "1099-INT",
+		form_name: "Interest Income",
+		form_description: "Interest earned from banks or investments.",
+		id: "1099-int",
+	},
+	{
+		form_code: "1099-DIV",
+		form_name: "Dividends and Distributions",
+		form_description: "Investment dividend income.",
+		id: "1099-div",
+	},
+	{
+		form_code: "1098",
+		form_name: "Mortgage Interest Statement",
+		form_description: "Reports mortgage interest paid. Used for property and liability verification.",
+		id: "1098",
+	},
+	{
+		form_code: "1098-T",
+		form_name: "Tuition Statement",
+		form_description: "Education expenses that may affect financial profile.",
+		id: "1098-t",
+	},
+	{
+		form_code: "1120",
+		form_name: "U.S. Corporation Income Tax Return",
+		form_description: "Corporate tax return for business income review.",
+		id: "1120",
+	},
+	{
+		form_code: "1120S",
+		form_name: "S Corporation Tax Return",
+		form_description: "Pass-through business income for shareholders.",
+		id: "1120s",
+	},
+	{
+		form_code: "1065",
+		form_name: "Partnership Tax Return",
+		form_description: "Reports partnership income and distributions.",
+		id: "1065",
+	},
+	{
+		form_code: "K-1",
+		form_name: "Partner’s Share of Income",
+		form_description: "Individual share from partnership or S-corp earnings.",
+		id: "k1",
+	},
+];

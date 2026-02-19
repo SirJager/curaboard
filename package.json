@@ -16,6 +16,7 @@
 		"db:drop": "migrate -source file://src/db/migrations -database $POSTGRES_URI -verbose drop -f"
 	},
 	"dependencies": {
+		"@directus/sdk": "^21.1.0",
 		"@hookform/resolvers": "^5.2.2",
 		"@tailwindcss/typography": "^0.5.19",
 		"class-variance-authority": "^0.7.1",

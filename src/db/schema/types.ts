@@ -60,7 +60,37 @@ export interface DirectusFolders {
   parent: string | null;
 }
 
+export interface FormTypes {
+  date_created: Timestamp | null;
+  date_updated: Timestamp | null;
+  form_code: string;
+  form_description: string | null;
+  form_name: string;
+  id: string;
+  sort: number | null;
+  status: Generated<string>;
+  user_created: string | null;
+  user_updated: string | null;
+}
+
+export interface FormUpdates {
+  date_created: Timestamp | null;
+  date_effective: Timestamp | null;
+  date_updated: Timestamp | null;
+  id: string;
+  sort: number | null;
+  status: Generated<string>;
+  update_content: string | null;
+  update_description: string | null;
+  update_tags: Json | null;
+  update_title: string | null;
+  user_created: string | null;
+  user_updated: string | null;
+}
+
 export interface DB {
   directus_files: DirectusFiles;
   directus_folders: DirectusFolders;
+  form_types: FormTypes;
+  form_updates: FormUpdates;
 }
