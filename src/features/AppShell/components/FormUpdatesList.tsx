@@ -12,7 +12,7 @@ export default async function FormUpdatesList() {
 		<div id="form-updates-list" className="flex-1 min-h-0">
 			<ul className="list bg-base-100 rounded-box shadow-md h-full overflow-y-auto">
 				{data.map((form, index) => {
-					const key = `${form}-${index}-${form.form_type}`;
+					const key = `${form}-${index}-${form.id}`;
 					return <FormUpdatesListCard key={key} form={form} index={index} />;
 				})}
 			</ul>

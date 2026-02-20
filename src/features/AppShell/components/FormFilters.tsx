@@ -9,8 +9,8 @@ export default async function FormFilters() {
 	}
 
 	return (
-		<div id="forms-filters" className="max-h-30 h-30 overflow-auto my-2">
-			<form className="space-x-2 space-y-2 pt-4 px-1 overflow-auto">
+		<div id="forms-filters" className="max-h-40 h-40 overflow-auto my-2 bg-base-300 rounded-box">
+			<form className="space-x-2 space-y-2 p-2 pt-4 pb-8 overflow-auto flex flex-wrap">
 				<input className="btn btn-square" type="reset" value="×" />
 				{data.map((form, index) => {
 					const key = form.id;

@@ -19,7 +19,7 @@ export default async function RootLayout({children}: LayoutProps) {
 	const mode = getThemeMode(theme);
 
 	return (
-		<html lang="en" className={notoSans.variable} data-theme={theme}>
+		<html lang="en" className={notoSans.variable} data-theme={theme} suppressHydrationWarning={true}>
 			<body className="bg-background text-foreground antialiased">
 				{/**/}
 				{children}

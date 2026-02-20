@@ -25,7 +25,7 @@ export type JsonValue = JsonArray | JsonObject | JsonPrimitive;
 
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
-export interface DirectusFiles {
+export interface DirectusFile {
   charset: string | null;
   created_on: Generated<Timestamp>;
   description: string | null;
@@ -54,13 +54,43 @@ export interface DirectusFiles {
   width: number | null;
 }
 
-export interface DirectusFolders {
+export interface DirectusFolder {
   id: string;
   name: string;
   parent: string | null;
 }
 
-export interface FormTypes {
+export interface DirectusUser {
+  appearance: string | null;
+  auth_data: Json | null;
+  avatar: string | null;
+  description: string | null;
+  email: string | null;
+  email_notifications: Generated<boolean | null>;
+  external_identifier: string | null;
+  first_name: string | null;
+  id: string;
+  language: Generated<string | null>;
+  last_access: Timestamp | null;
+  last_name: string | null;
+  last_page: string | null;
+  location: string | null;
+  password: string | null;
+  provider: Generated<string>;
+  role: string | null;
+  status: Generated<string>;
+  tags: Json | null;
+  text_direction: Generated<string>;
+  tfa_secret: string | null;
+  theme_dark: string | null;
+  theme_dark_overrides: Json | null;
+  theme_light: string | null;
+  theme_light_overrides: Json | null;
+  title: string | null;
+  token: string | null;
+}
+
+export interface FormType {
   date_created: Timestamp | null;
   date_updated: Timestamp | null;
   form_code: string;
@@ -73,7 +103,7 @@ export interface FormTypes {
   user_updated: string | null;
 }
 
-export interface FormUpdates {
+export interface FormUpdate {
   date_created: Timestamp | null;
   date_effective: Timestamp | null;
   date_updated: Timestamp | null;
@@ -89,8 +119,9 @@ export interface FormUpdates {
 }
 
 export interface DB {
-  directus_files: DirectusFiles;
-  directus_folders: DirectusFolders;
-  form_types: FormTypes;
-  form_updates: FormUpdates;
+  directus_files: DirectusFile;
+  directus_folders: DirectusFolder;
+  directus_users: DirectusUser;
+  form_types: FormType;
+  form_updates: FormUpdate;
 }

@@ -16,20 +16,24 @@ export default function AppShell({children}: {children: React.ReactNode}) {
 				<FormUpdatesList />
 			</div>
 
-			<div className="flex-1 relative p-4 bg-base-300 overflow-hidden">
+			<div className="flex-1 relative overflow-auto p-8 bg-base-300">
 				{/**/}
 				{children}
-				<div id="message-bar" className="absolute bottom-4">
-					<label className="input input-lg outline-none">
-						<svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-							<g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor">
-								<circle cx="11" cy="11" r="8"></circle>
-								<path d="m21 21-4.3-4.3"></path>
-							</g>
-						</svg>
-						<input type="search" required placeholder="Write message" />
-					</label>
+				{/**/}
+
+				<div id="message-bar" className="absolute bottom-8 w-2/4 left-[20%]">
+					<div className="gap-2">
+						<div className="chat chat-end">
+							<div className="chat-bubble chat-bubble-neutral btn">I Acknowledge!</div>
+						</div>
+					</div>
+					<input
+						type="text"
+						placeholder="Enter your message here..."
+						className="input h-16 min-h-16 input-lg rounded-full w-full mx-auto shadow-xl drop-shadow-2xl"
+					/>
 				</div>
+
 				{/**/}
 			</div>
 		</div>
