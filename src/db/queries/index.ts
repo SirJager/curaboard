@@ -14,10 +14,10 @@ type UpdatesFilters = {
 	tags?: string;
 };
 
-export async function getFormUpdates(props?: UpdatesFilters) {
+export async function getFormUpdates(props?: UpdatesFilters): ResultPromise<IFormUpdates[]> {
 	try {
-		const result = await directus.request(readItems("form_updates", {}));
-		const data = result;
+		let query = db.selectFrom("form_updates").selectAll();
+		const data = await query.orderBy("date_created", "desc").execute();
 		return {ok: true, data};
 	} catch (e: any) {
 		return {ok: false, error: e.message ?? "failed to fetch data"};

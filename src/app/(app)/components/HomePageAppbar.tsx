@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "@/components/Link";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import {getSession} from "@/lib/auth";

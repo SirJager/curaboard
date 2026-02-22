@@ -1,16 +1,11 @@
-"use client";
-
-import {useSearchParams} from "next/navigation";
+import UpdatesGrid from "@/components/UpdatesGrid";
+import {getFormUpdates} from "@/db/queries";
+import {Suspense} from "react";
 import HomePageAppbar from "./components/HomePageAppbar";
+import SearchFilters from './components/SearchFilters';
 
 export default function Page() {
-	const searchParams = useSearchParams();
-	const query = searchParams.get("search") ?? "";
-	const form = searchParams.get("form") ?? "";
-	const tags = searchParams.get("tags") ?? "";
-	const date = searchParams.get("date") ?? "";
-
-	const filters = {query, form, tags, date};
+	const updatesPromise = getFormUpdates();
 
 	return (
 		<div className="relative">
@@ -20,7 +15,13 @@ export default function Page() {
 					<div id="search" className="flex items-center justify-center">
 						<input placeholder="Search anything..." className="input input-xl px-4 outline-none w-full" />
 					</div>
+          <SearchFilters />
+					<UpdatesGrid resultPromise={updatesPromise} />
 				</div>
+
+				<Suspense fallback={<div>Loading...</div>}>
+					<UpdatesGrid resultPromise={updatesPromise} />
+				</Suspense>
 			</div>
 		</div>
 	);
