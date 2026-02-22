@@ -29,7 +29,6 @@ export async function GET(request: Request) {
 		let theme;
 		if (stored) {
 			theme = getThemeMode(stored);
-			console.log(theme);
 		}
 
 		const html = simpleOGBuilder({...data, theme: data.theme ?? theme});

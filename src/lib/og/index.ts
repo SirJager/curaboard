@@ -1,5 +1,4 @@
 import site from "../constants";
-import logger from "../logger";
 import {OGTheme, themeNames} from "./theme";
 import {OGPropsData} from "./types";
 
@@ -27,7 +26,6 @@ export function ogParamsBuilder(props: ogUrlBuilderProps) {
 	if (props.date) str.push(`date=${props.date?.toISOString()}`);
 	const params = str.join("&");
 	const url = `${site.apiRoutes.ogImage}${params}`;
-	logger.log(url);
 	return {params, url};
 }
 
