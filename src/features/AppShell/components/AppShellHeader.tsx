@@ -1,12 +1,13 @@
 import ThemeSwitcher from "@/components/ThemeSwitcher";
-import {getAuthenticatedUser} from "@/db/queries";
+import Link from "next/link";
 
 export default async function AppShellHeader() {
-	const user = await getAuthenticatedUser();
-
 	return (
 		<div id="app-name-and-logo" className="flex items-center justify-between gap-2">
-			<div className="text-2xl font-semibold">CuraBoard</div>
+			<Link href="/">
+				<div className="text-2xl font-semibold">CuraBoard</div>
+			</Link>
+
 			<div className="flex items-center justify-center gap-2">
 				<div className="avatar avatar-placeholder">
 					<div className="bg-neutral text-neutral-content w-16 rounded-full">

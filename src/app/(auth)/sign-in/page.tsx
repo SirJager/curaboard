@@ -1,6 +1,13 @@
+"use client";
+
+import {signIn} from "@/lib/auth";
+import {useActionState} from "react";
+
 export default function LoginPage() {
+	const [_, action, pending] = useActionState(signIn, undefined);
+
 	return (
-		<form action="/api/auth/sign-in" method="POST" className="p-4">
+		<form action={action} className="p-4">
 			<fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
 				<legend className="fieldset-legend">Login</legend>
 
@@ -10,8 +17,8 @@ export default function LoginPage() {
 				<label className="label">Password</label>
 				<input type="password" name="password" className="input" placeholder="Password" />
 
-				<button type="submit" className="btn btn-neutral mt-4">
-					Login
+				<button disabled={pending} type="submit" className="btn btn-neutral mt-4">
+					{pending ? "pending..." : "Sign in"}
 				</button>
 			</fieldset>
 		</form>

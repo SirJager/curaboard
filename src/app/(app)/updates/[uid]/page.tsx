@@ -1,15 +1,16 @@
 import {getFormUpdate, getUser} from "@/db/queries";
 import {parseDate} from "@/lib/utils";
 
-export default async function VerifierPage({params}: {params: Promise<{updateId: string}>}) {
-	const {updateId} = await params;
-	const {data: update, ok, error} = await getFormUpdate(updateId);
+export default async function VerifierPage({params}: {params: Promise<{uid: string}>}) {
+	const {uid} = await params;
+	const {data: update, ok, error} = await getFormUpdate(uid);
 
 	if (!ok) {
+		console.log("uid.page", error);
 		return <div className="text-5xl">{error}</div>;
 	}
 
-	const {data: user, ...userRes} = await getUser(update.user_created ?? "");
+	const {data: user, ...userRes} = await getUser({id: update.user_created ?? ""});
 	if (!userRes.ok || !user) {
 		return <div className="text-5xl">{error}</div>;
 	}

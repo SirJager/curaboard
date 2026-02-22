@@ -1,4 +1,4 @@
-import client from "@/lib/directus";
+import directus from "@/lib/directus";
 import {registerUser} from "@directus/sdk";
 import {NextRequest, NextResponse} from "next/server";
 
@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
 	}
 
 	try {
-		await client.request(registerUser(email, password));
+		await directus.request(registerUser(email, password));
 		const url = request.nextUrl.clone();
 		url.pathname = "/";
 		return NextResponse.redirect(url);

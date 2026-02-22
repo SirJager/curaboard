@@ -1,33 +1,46 @@
-import client from "@/lib/directus";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import "server-only";
+import {toUser} from "@/lib/auth/parser";
+import {SignupFormSchema} from "@/lib/auth/schema";
+import directus from "@/lib/directus";
+import site from "@constants";
+import {readMe} from "@directus/sdk";
 import {cookies} from "next/headers";
-import {NextRequest, NextResponse} from "next/server";
+import type {NextRequest} from "next/server";
 
 export async function POST(request: NextRequest) {
-	const formData = await request.formData();
-
-	const email = formData.get("email") as string;
-	const password = formData.get("password") as string;
-
-	if (!email || !password) {
-		return NextResponse.json({error: "All fields are required"}, {status: 400});
-	}
-
+	const headers = new Headers({"Content-Type": "application/json"});
 	try {
-		const response = await client.login({email, password});
-		if (response.access_token) {
-			(await cookies()).set("directus_session_token", response.access_token, {
+		const formData = await request.formData();
+		const validated = SignupFormSchema.safeParse({
+			email: formData.get("email"),
+			password: formData.get("password"),
+		});
+		const {success: ok, data, error} = validated;
+
+		// If any form fields are invalid, return early
+		if (!ok) {
+			return new Response(JSON.stringify({error: error.message}), {status: 400, headers});
+		}
+
+		const authResult = await directus.login(data);
+
+		if (authResult.access_token) {
+			(await cookies()).set(site.vars.session, authResult.access_token, {
 				path: "/",
-				secure: true,
 				httpOnly: true,
 				sameSite: "strict",
-				expires: 1000 * 60 * 15, // 1000ms(1sec) * 60 sec * [X] minutes
+				maxAge: 60 * 30,
 			});
+
+			const response = toUser(await directus.request(readMe()));
+			return new Response(JSON.stringify(response), {status: 200, headers});
 		}
-		const url = request.nextUrl.clone();
-		url.pathname = "/";
-		return NextResponse.redirect(url);
-	} catch (error) {
-		console.log(error);
-		return NextResponse.json({error: "Login failed"}, {status: 500});
+
+		const response = {ok: false, error: "Invalid email or password"};
+		return new Response(JSON.stringify(response), {status: 401, headers});
+	} catch (error: any) {
+		const response = {ok: false, error: error.message ?? "Something went wrong"};
+		return new Response(JSON.stringify(response), {status: 500, headers});
 	}
 }

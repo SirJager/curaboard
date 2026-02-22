@@ -22,6 +22,7 @@ export default async function RootLayout({children}: LayoutProps) {
 		<html lang="en" className={notoSans.variable} data-theme={theme} suppressHydrationWarning={true}>
 			<body className="bg-background text-foreground antialiased">
 				{/**/}
+
 				{children}
 				<Toaster richColors position="top-center" theme={mode} />
 			</body>

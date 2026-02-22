@@ -16,7 +16,7 @@ export default function AppShell({children}: {children: React.ReactNode}) {
 				<FormUpdatesList />
 			</div>
 
-			<div className="flex-1 relative overflow-auto p-8 bg-base-300">
+			<div className="flex-1 relative overflow-auto bg-base-300">
 				{/**/}
 				{children}
 				{/**/}
